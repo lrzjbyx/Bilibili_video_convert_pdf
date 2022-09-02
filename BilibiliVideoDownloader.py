@@ -1,7 +1,6 @@
 import os
 import sys
 from copy import copy
-import js2py
 import requests, time, hashlib, urllib.request, re, json
 from lxml import etree
 from urllib.parse import urljoin, urlparse

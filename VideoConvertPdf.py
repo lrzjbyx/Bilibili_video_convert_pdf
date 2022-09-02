@@ -14,7 +14,7 @@ def hist_compare(image1, image2):
     match1 = cv2.compareHist(hist1, hist2, cv2.HISTCMP_BHATTACHARYYA)
     match2 = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)
     match3 = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CHISQR)
-    print("巴氏距离: %s, 相关性: %s, 卡方: %s"%(match1, match2, match3))
+    # print("巴氏距离: %s, 相关性: %s, 卡方: %s"%(match1, match2, match3))
     return (match1, match2, match3)
 
 
@@ -55,7 +55,7 @@ class VideoConvertPdfProcess(Process):
                 c += 1
                 pre = frame
         self.id_dict[str(self.id)] = r
-        print(self.id_dict)
+        # print(self.id_dict)
 
 
 class VideoConvertPdf():

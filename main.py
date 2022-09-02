@@ -1,3 +1,4 @@
+import argparse
 import os
 
 from BilibiliVideoDownloader import BilibiliVideoDownloader
@@ -30,6 +31,13 @@ def main(path):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--address', type=str)
+    opt = parser.parse_args()
+    if opt.address == "":
+        print("输入地址不合法")
+    main(opt.address)
+
     # main("https://www.bilibili.com/video/BV19d4y197NK?spm_id_from=333.851.b_7265636f6d6d656e64.7&vd_source=c60a8cff7283d8fe87cf05ce442b3759")
     # print(os.path.splitext(file)[-1])
     main(r"D:\Code\Python\Bilibili_video_convert_pdf\bilibili\朋友们没想到我居然要解释这种事情")
