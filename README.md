@@ -11,7 +11,10 @@
 ```
 * 哔哩哔哩视频转成pdf
 ```python
+    # 单p下载 转换
     python main.py --address https://www.bilibili.com/video/BV19d4y197NK
+    # 多个p 转换
+    python main.py --address https://www.bilibili.com/video/BV1ZD4y1H72X
 ```
 ### 示例
 * [原视频](https://www.bilibili.com/video/BV19d4y197NK?spm_id_from=333.851.header_right.history_list.click&vd_source=c60a8cff7283d8fe87cf05ce442b3759)

@@ -21,7 +21,9 @@ def main(path):
     file_list = os.listdir(file_path)
     file_list = [ file  for file in file_list if os.path.splitext(file)[-1] == '.mp4' ]
 
+    print("转pdf开始！")
     for file_name in file_list:
+        print("《{0}》开始转关键帧pdf！".format(file_name))
         v = VideoConvertPdf(os.path.join(file_path,file_name))
         v.convert()
 
@@ -40,4 +42,4 @@ if __name__ == '__main__':
 
     # main("https://www.bilibili.com/video/BV19d4y197NK?spm_id_from=333.851.b_7265636f6d6d656e64.7&vd_source=c60a8cff7283d8fe87cf05ce442b3759")
     # print(os.path.splitext(file)[-1])
-    main(r"D:\Code\Python\Bilibili_video_convert_pdf\bilibili\朋友们没想到我居然要解释这种事情")
+    # main(r"D:\Code\Python\Bilibili_video_convert_pdf\bilibili\朋友们没想到我居然要解释这种事情")

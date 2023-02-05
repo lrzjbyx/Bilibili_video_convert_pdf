@@ -193,7 +193,7 @@ class BilibiliVideoDownloader():
                 "cid": video_eppisode["cid"],
                 "title": title,
                 "audio_quality": [a["id"] for a in t["data"]["dash"]["audio"]],
-                "video_quality": t["data"]["support_formats"],
+                "video_quality": [a["id"] for a in t["data"]["dash"]["video"]],
             }
             print(item)
 
@@ -231,11 +231,14 @@ class BilibiliVideoDownloader():
             video_item = [v for v in self.every_video_detailed[download_item["cid"]]["data"]["dash"]["video"] if
                           v["id"] == int(download_item["video_quality"])]
             if len(video_item) == 0:
+                print("未找到《{0}》视频资源".format(video_title))
                 return
 
+            print("视频《{0}》准备下载！".format(video_title))
             for i, video_url in enumerate(
                     [item["baseUrl"] for item in video_item if item["codecs"] == download_item["video_codecs"]]):
                 urllib.request.urlretrieve(url=video_url, filename=video_uuid_path)
+            print("视频《{0}》下载完成！".format(video_title))
 
             # 下载音频
             audio_quality = int(download_item["audio_quality"])
@@ -243,13 +246,18 @@ class BilibiliVideoDownloader():
             audio_item = [a for a in self.every_video_detailed[download_item["cid"]]["data"]["dash"]["audio"] if
                           a["id"] == audio_quality]
 
+            print("音频《{0}》准备下载！".format(video_title))
             for i, video_url in enumerate([item["baseUrl"] for item in audio_item]):
                 urllib.request.urlretrieve(url=video_url, filename=audio_uuid_path)
 
+            print("音频《{0}》下载完成！".format(video_title))
+
+
+            print("《{0}》视频音频合并视频！".format(video_title))
             if self.combining_video_audio(video_uuid_path, audio_uuid_path, video_title):
                 os.remove(video_uuid_path)
                 os.remove(audio_uuid_path)
-                print("{0}视频下载完成".format(video_title))
+                print("《{0}》视频下载完成".format(video_title))
 
         return self.save_path
 
@@ -258,20 +266,26 @@ class BilibiliVideoDownloader():
         items = []
         for one_video_detailed_key in self.every_video_detailed.keys():
             item = {}
-            max_quality = (80 if max([o["quality"] for o in self.every_video_detailed[one_video_detailed_key]["data"][
-                "support_formats"]]) > 80 else max(
-                [o["quality"] for o in self.every_video_detailed[one_video_detailed_key]["data"]["support_formats"]]))
+
+            video_id_codecs = [ {"id":o["id"],"codecs":o["codecs"]} for o in self.every_video_detailed[one_video_detailed_key]["data"]["dash"]["video"]]
+            print(video_id_codecs)
+
+            audio_id_codecs = [ {"id":o["id"],"codecs":o["codecs"]} for o in self.every_video_detailed[one_video_detailed_key]["data"]["dash"]["audio"]]
+            print(audio_id_codecs)
+
+            audio_quality = max([o["id"] for o in audio_id_codecs])
+            video_quality = max([o["id"] for o in video_id_codecs])
+
 
             item["cid"] = one_video_detailed_key
-            item["video_quality"] = max_quality
-            item["audio_quality"] = max(
-                [a["id"] for a in self.every_video_detailed[one_video_detailed_key]["data"]["dash"]["audio"]])
-            item["video_codecs"] = \
-                [v["codecs"] for v in self.every_video_detailed[one_video_detailed_key]["data"]["support_formats"] if
-                 v["quality"] == max_quality][0][0]
+            item["video_quality"] = video_quality
+            item["audio_quality"] = audio_quality
+            item["video_codecs"] = [ v["codecs"] for v in video_id_codecs if v["id"] == video_quality][0]
             items.append(item)
 
         return items
+
+
 
     def combining_video_audio(self, video_uuid_path, audio_uuid_path, video_title):
         try:
@@ -301,6 +315,7 @@ class BilibiliVideoDownloader():
             ffmpeg.run(stream)
             return True
         except:
+            print("出现异常!!!")
             return False
 
 
