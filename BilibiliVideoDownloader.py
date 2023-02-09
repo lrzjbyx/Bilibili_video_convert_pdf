@@ -119,6 +119,9 @@ class BilibiliVideoDownloader():
             ('Connection', 'keep-alive'),
         ]
         urllib.request.install_opener(self.opener)
+        #  检测目录是否存在
+        if not os.path.exists(self.save_temporary_doc):
+            os.mkdir(self.save_temporary_doc)
 
     def BvAv(self, t):
         # AV BV
