@@ -7,11 +7,11 @@
 ### 安装
 * Python 3.9.6
 ```shell
-conda create -n venv python==3.9.6
-conda activate venv
-git clone https://github.com/lrzjbyx/Bilibili_video_convert_pdf.git
-cd Bilibili_video_convert_pdf
-pip install -r requirements.txt
+    conda create -n venv python==3.9.6
+    conda activate venv
+    git clone https://github.com/lrzjbyx/Bilibili_video_convert_pdf.git
+    cd Bilibili_video_convert_pdf
+    pip install -r requirements.txt
 ```
 ### 使用
 * 本地文件转换成pdf
