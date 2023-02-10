@@ -195,10 +195,12 @@ class BilibiliVideoDownloader():
             item = {
                 "cid": video_eppisode["cid"],
                 "title": title,
-                "audio_quality": [a["id"] for a in t["data"]["dash"]["audio"]],
-                "video_quality": [a["id"] for a in t["data"]["dash"]["video"]],
+                "audio_quality": [{"id":a["id"],"codecs":a["codecs"]} for a in t["data"]["dash"]["audio"]],
+                "video_quality": [{"id":a["id"],"codecs":a["codecs"]} for a in t["data"]["dash"]["video"]],
             }
+            print("*******格式******")
             print(item)
+
 
             items.append(item)
 
@@ -271,10 +273,8 @@ class BilibiliVideoDownloader():
             item = {}
 
             video_id_codecs = [ {"id":o["id"],"codecs":o["codecs"]} for o in self.every_video_detailed[one_video_detailed_key]["data"]["dash"]["video"]]
-            print(video_id_codecs)
 
             audio_id_codecs = [ {"id":o["id"],"codecs":o["codecs"]} for o in self.every_video_detailed[one_video_detailed_key]["data"]["dash"]["audio"]]
-            print(audio_id_codecs)
 
             audio_quality = max([o["id"] for o in audio_id_codecs])
             video_quality = max([o["id"] for o in video_id_codecs])

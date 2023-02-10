@@ -3,6 +3,7 @@
 ### 介绍
 * 下载哔哩哔哩视频
 * 视频转成关键帧PDF
+* 默认下载支持格式中清晰度最高的
 
 ### 使用
 * 本地文件转换成pdf
@@ -16,6 +17,8 @@
     # 多个p 转换
     python main.py --address https://www.bilibili.com/video/BV1ZD4y1H72X
 ```
+* 获取视频和音频支持格式 require_video_list
+
 ### 示例
 * [原视频](https://www.bilibili.com/video/BV19d4y197NK?spm_id_from=333.851.header_right.history_list.click&vd_source=c60a8cff7283d8fe87cf05ce442b3759)
 ![video](resource/video.jpg)
