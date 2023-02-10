@@ -4,7 +4,14 @@
 * 下载哔哩哔哩视频
 * 视频转成关键帧PDF
 * 默认下载支持格式中清晰度最高的
-
+### 安装
+* Python 3.9.6
+```shell
+conda create -n venv python==3.9.6
+conda activate venv
+pip install -r requirements.txt
+git clone https://github.com/lrzjbyx/Bilibili_video_convert_pdf.git
+```
 ### 使用
 * 本地文件转换成pdf
 ```python
