@@ -43,8 +43,8 @@
 * [哔哩下载姬](https://github.com/leiurayer/downkyi)：哔哩下载姬
 
 ### 更新日志
-* 文件路径找不到 
-  * Window平台需要加入ffmpeg/ffmpeg.exe文件 [已修复]  
+* 文件路径找不到 [已修复]  
+  * Window平台需要加入ffmpeg/ffmpeg.exe文件
 * PDF关键帧乱序 [已修复]    
 
 ### 声明
