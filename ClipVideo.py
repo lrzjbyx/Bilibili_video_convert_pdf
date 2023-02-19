@@ -40,6 +40,7 @@ class ClipVideo():
         self.fps = self.cap.get(cv2.CAP_PROP_FPS)
         # 总共帧数
         self.num_frames = self.cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        print("总共帧数{0},每秒帧率{1}".format(self.num_frames,self.fps))
         # 高度
         self.frame_height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         # 宽度

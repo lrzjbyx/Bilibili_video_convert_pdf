@@ -25,6 +25,7 @@ class VideoConvertPdfProcess(Process):
         self.id = process_id
         self.video_thunk_path = item["path"]
         self.episodes = item["episodes"]
+        self.index =  item["index"]
         # 用来保存结果
         self.id_dict = id_dict
 
@@ -54,7 +55,8 @@ class VideoConvertPdfProcess(Process):
             if pre is None:
                 c += 1
                 pre = frame
-        self.id_dict[str(self.id)] = r
+        self.id_dict[str(self.index)] = r
+        # print(self.index)
         # print(self.id_dict)
 
 
@@ -97,8 +99,10 @@ class VideoConvertPdf():
             # 视频块
             for i in range(len(clip_video_path)):
                 item = {}
-                item["path"] = clip_video_path[i]
+                # item["path"] = clip_video_path[i]
+                item["path"] = os.path.join(self.save_path,"{0}.mp4".format(i))
                 item["episodes"] = points[i]
+                item["index"] = i
                 self.thunk_video.append(item)
                 # 初始化结果字典
                 result_dict[str(i)] = []
@@ -115,8 +119,14 @@ class VideoConvertPdf():
 
             # 合并特征帧
             merge_list = []
-            for item in result_dict.values():
+            # print(result_dict)
+
+
+            for k,item in result_dict.items():
                 merge_list.extend(item)
+
+
+            print(len(merge_list))
 
             merge_list[0].save(self.file_name+".pdf", "pdf", save_all=True, append_images=merge_list)
 
