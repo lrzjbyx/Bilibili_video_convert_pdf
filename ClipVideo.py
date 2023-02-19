@@ -22,7 +22,7 @@ def clip_process_task(video_path, begin_frame_points, end_frame_points, process_
             break
         c += 1
 
-    print("线程{0}完成切割".format(process_id))
+    # print("线程{0}完成切割".format(process_id))
 
 
 
@@ -76,7 +76,8 @@ class ClipVideo():
             p.join()
 
 
-        print(clip_task_points)
+        # 视频切割点
+        # print(clip_task_points)
         return True,clip_task_points
 
 
