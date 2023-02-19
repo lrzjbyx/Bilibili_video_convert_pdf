@@ -42,8 +42,10 @@
 * [哔哩哔哩-API收集整理](https://github.com/SocialSisterYi/bilibili-API-collect)：B站API归档
 * [哔哩下载姬](https://github.com/leiurayer/downkyi)：哔哩下载姬
 
-### 注意
-* Window平台需要加入ffmpeg/ffmpeg.exe文件 [已修复]    
+### 更新日志
+* 文件路径找不到 
+  * Window平台需要加入ffmpeg/ffmpeg.exe文件 [已修复]  
+* PDF关键帧乱序 [已修复]    
 
 ### 声明
 * 适合学习使用
