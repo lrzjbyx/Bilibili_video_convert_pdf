@@ -4,6 +4,7 @@ import os
 from BilibiliVideoDownloader import BilibiliVideoDownloader
 from VideoConvertPdf import VideoConvertPdf
 
+
 def main(path):
     file_path = ""
     # 判断是否为网络链接

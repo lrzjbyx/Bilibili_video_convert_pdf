@@ -10,6 +10,7 @@ import uuid
 import ffmpeg
 from progress import bar
 from progressbar import progressbar
+import platform
 
 '''
         支持如下视频格式  https://github.com/leiurayer/downkyi
@@ -310,15 +311,25 @@ class BilibiliVideoDownloader():
                 @   优点：满足需求 速度稍微变快
                 @   缺点：方式一的多进程版本
             '''
+            ffmpeg_path = os.path.join(os.path.join(os.getcwd(), "ffmpeg"),"ffmpeg")
+
             video_stream = ffmpeg.input(video_uuid_path)
             audio_stream = ffmpeg.input(audio_uuid_path)
             output_stream = ffmpeg.output(audio_stream, video_stream,
                                           r'{}.mp4'.format(os.path.join(self.save_path, video_title)))
             stream = ffmpeg.overwrite_output(output_stream)
-            ffmpeg.run(stream)
+
+            # window 使用 ffmpeg
+            if platform.system().lower() == 'windows':
+                ffmpeg.run(stream,cmd=ffmpeg_path)
+            else:
+                ffmpeg.run(stream)
             return True
-        except:
-            print("出现异常!!!")
+
+        except Exception as e:
+            os.remove(video_uuid_path)
+            os.remove(audio_uuid_path)
+            print("异常:{0}".format(e))
             return False
 
 
