@@ -29,7 +29,7 @@ def clip_process_task(video_path, begin_frame_points, end_frame_points, process_
 class ClipVideo():
     def __init__(self,video_path,vide_save_path):
         # CPU 个数
-        self.cpu_count = cpu_count()
+        self.cpu_count = int(cpu_count()/2)
         # 视频保存路径
         self.vide_save_path = vide_save_path
         # 视频读取路径

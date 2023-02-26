@@ -16,8 +16,10 @@
 ### 使用
 * 本地文件转换成pdf
 ```python
-    python main.py --address file_path[video]
+    python main.py --address file_path[video] --target save_path --pdf True --cookie "cookie"
 ```
+* cookie(拷贝cookie的value) 如下所示
+  ![cookie](resource/cookie.png)
 * 哔哩哔哩视频转成pdf
 ```python
     # 单p下载 转换
@@ -46,6 +48,8 @@
 * ~~文件路径找不到~~ [已修复]  
   * Window平台需要加入ffmpeg/ffmpeg.exe文件
 * ~~PDF关键帧乱序~~ [已修复]    
+* ~~内存溢出~~ [已修复]    
+* ~~支持cookie~~ [已修复]    
 
 ### 声明
 * 适合学习使用

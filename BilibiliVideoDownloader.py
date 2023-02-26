@@ -79,7 +79,7 @@ class BilibiliVideoDownloader():
     @:param save_path   视频位置
     '''
 
-    def __init__(self, video_url, save_path=os.path.join(os.getcwd(), "bilibili")):
+    def __init__(self, video_url, save_path=os.path.join(os.getcwd(), "bilibili"),cookie=""):
         # 下载临时目录
         self.save_temporary_doc = os.path.join(os.getcwd(), "temp")
         # 保存路径
@@ -123,6 +123,11 @@ class BilibiliVideoDownloader():
         #  检测目录是否存在
         if not os.path.exists(self.save_temporary_doc):
             os.mkdir(self.save_temporary_doc)
+
+        # 添加cookie
+        if cookie != "":
+            BilibiliVideoDownloader.headers["cookie"] = cookie
+
 
     def BvAv(self, t):
         # AV BV

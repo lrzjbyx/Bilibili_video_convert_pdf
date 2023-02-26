@@ -5,12 +5,16 @@ from BilibiliVideoDownloader import BilibiliVideoDownloader
 from VideoConvertPdf import VideoConvertPdf
 
 
-def main(path):
+def main(opt):
+    path = opt.address
+    if path == "":
+        print("输入地址不合法")
+
     file_path = ""
     # 判断是否为网络链接
     if path[:8] =="http://" or path[:8] =="https://":
         # 下载视频
-        d = BilibiliVideoDownloader(path)
+        d = BilibiliVideoDownloader(path,save_path=opt.target,cookie=opt.cookie)
         d.require_input_link_video()
         d.require_video_list()
         d.get_all_video_episodes()
@@ -22,25 +26,24 @@ def main(path):
     file_list = os.listdir(file_path)
     file_list = [ file  for file in file_list if os.path.splitext(file)[-1] == '.mp4' ]
 
-    print("转pdf开始！")
-    for file_name in file_list:
-        print("《{0}》开始转关键帧pdf！".format(file_name))
-        v = VideoConvertPdf(os.path.join(file_path,file_name))
-        v.convert()
+    if opt.pdf:
+        print("转pdf开始！")
+        for file_name in file_list:
+            print("《{0}》开始转关键帧pdf！".format(file_name))
+            v = VideoConvertPdf(os.path.join(file_path,file_name))
+            v.convert()
 
-    print("文件转换成功！")
+        print("文件转换成功！")
 
 
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--address', type=str)
+    parser.add_argument('--address', type=str,default=r"https://www.bilibili.com/video/BV1jA411m7WG/?spm_id_from=333.1007.tianma.1-3-3.click&vd_source=da046271f989b34b9f60f03f7a1a20be")
+    parser.add_argument('--pdf', type=bool,default=True)
+    parser.add_argument('--target', type=str, default = os.path.join(os.getcwd(), "bilibili"))
+    parser.add_argument('--cookie', type=str,default="")
     opt = parser.parse_args()
-    if opt.address == "":
-        print("输入地址不合法")
-    main(opt.address)
+    main(opt)
 
-    # main("https://www.bilibili.com/video/BV19d4y197NK?spm_id_from=333.851.b_7265636f6d6d656e64.7&vd_source=c60a8cff7283d8fe87cf05ce442b3759")
-    # print(os.path.splitext(file)[-1])
-    # main(r"D:\Code\Python\Bilibili_video_convert_pdf\bilibili\朋友们没想到我居然要解释这种事情")

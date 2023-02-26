@@ -30,3 +30,5 @@ typing_extensions==4.4.0
 tzdata==2022.7
 tzlocal==4.2
 urllib3==1.26.14
+PyPDF2==3.0.1
+psutil==5.9.4
